@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer la Facture{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+
+ 
+    <p>Êtes-vous sûr de vouloir supprimer cet Facture ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_facture_delete', {'idfacture': facture.idfacture}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ facture.idfacture) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <a href="{{ path('app_appartement_show', {'idfacture': facture.idfacture}) }}">Annuler</a>
+    </main>
+{% endblock %}

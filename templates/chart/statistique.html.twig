@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistique{% endblock %}
+
+{% block body %}
+     <main id="main" class="main">
+
+    <h1>Nombre de discussions</h1>
+
+    <div>
+        {{ include('chart/discussionCHart.html.twig') }}
+    </div>
+
+            </main>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'Espace {{ espace.name }}{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Supprimer l'Espace "{{ espace.name }}"</h1>
+    <p>Nom: {{ espace.name }}</p>
+    <p>État: {{ espace.etat }}</p>
+    <p>Capacité: {{ espace.capacite }}</p>
+    <p>Description: {{ espace.description }}</p>
+
+    <p>Êtes-vous sûr de vouloir supprimer cet espace ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_espace_delete', {'idEspace': espace.idEspace}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espace.idEspace) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <a href="{{ path('app_espace_show', {'idEspace': espace.idEspace}) }}">Annuler</a>
+    </main>
+{% endblock %}

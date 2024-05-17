@@ -1,0 +1,14 @@
+{# templates/espace/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Espace{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Nouvel Espace</h1>
+   <div>
+        {{ include('espace/form.html.twig') }}
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            <strong>{{ form_label(form.name, 'Nom de l\'espace', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.etat, 'État de l\'espace', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.etat) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.capacite, 'Capacité de l\'espace', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.capacite, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.capacite) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.description, 'Description de l\'espace', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>

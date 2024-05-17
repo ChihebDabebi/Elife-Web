@@ -1,0 +1,180 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+       .page-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+       .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 2rem;
+            background-color: #fff;
+        }
+
+       .profile-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+       .profile-image {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 2rem;
+        }
+
+       .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+       .profile-content h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+       .profile-content h4 {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+
+       .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+       .btn-cancel {
+            margin-left: 1rem;
+        }
+
+        /* Add some basic styling to the form fields */
+       .form-control {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+       .form-control:focus {
+            border-color: #aaa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add some basic styling to the buttons */
+       .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+       .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+       .btn-primary:hover {
+            background-color: #0069d9;
+        }
+
+       .btn-cancel {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+       .btn-cancel:hover {
+            background-color: #c82333;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="page-header">
+                <div class="page-title">
+                    <h3>Profile</h3>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="profile-set">
+                        <div class="profile-top">
+                            <div class="profile-content">
+                                {% if app.user is not null %}
+                                <h2>{{ app.user.getNom() }} {{ app.user.getPrenom() }}</h2>
+                                <h4>{{ app.user.getMail() }}</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <form method="post" action="{{ path('editAdmin') }}">
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    {{ form_widget(form.nom) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom">Prenom</label>
+                                    {{ form_widget(form.prenom) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="number">Numéro de téléphone</label>
+                                    {{ form_widget(form.number) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="mail">Email</label>
+                                    {{ form_widget(form.mail) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    {{ form_widget(form.role) }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                <a href="{{ url('backendHome') }}" class="btn btn-cancel">Annuler</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chart.js/chart.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('assets/js/theme.js') }}"></script>
+{% endblock%}

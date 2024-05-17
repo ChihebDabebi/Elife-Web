@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@joeattardi/emoji-button": "^4.6.4",
+    "chart.js": "^4.4.2",
+    "emoji-js": "^3.8.0",
+    "picmo": "^5.8.5"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@hotwired/turbo": "^7.0.1",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets"
+  }
+}

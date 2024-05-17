@@ -1,0 +1,156 @@
+{# templates/facture/paiement.html.twig #}
+
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Paiement de facture{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+
+            <form id="payment-form" method="post" action="{{ path('app_facture_paiement', { 'idFacture': facture.idfacture }) }}">
+                <div id="card-element">
+                    <!-- Element pour le formulaire de carte -->
+                </div>
+
+                <!-- Utilisé pour afficher les erreurs de validation -->
+                <div id="card-errors" role="alert"></div>
+
+                <button id="submit-button" class="btn btn-primary mt-3">Payer</button>
+            </form>
+
+            <!-- Message de confirmation -->
+            <div id="confirmation-message" style="display: none;">
+                <h2>Votre paiement a été effectué avec succès !</h2>
+                <p>Montant payé: {{ paymentIntent.amount / 100 }} DNT</p>
+                <p>Date de paiement: {{ "now"|date("Y-m-d H:i:s") }}</p>
+                <p>Numéro de transaction: {{ paymentIntent.id }}</p>
+<a href="{{ path('download_receipt_pdf', { 'idFacture': facture.idfacture }) }}" class="btn btn-primary mt-3">Télécharger le reçu PDF</a>
+            </div>
+        </div>
+    </main><!-- End #main -->
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Styles pour le formulaire de paiement */
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .card-element {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #card-errors {
+            margin-bottom: 20px;
+            color: red;
+        }
+
+        #submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        #confirmation-message {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            background-color: #d4edda;
+            color: #155724;
+        }
+          /* Styles pour les factures payées */
+        .paid {
+            color: green; /* Couleur verte pour les factures payées */
+        }
+
+        /* Styles pour les factures non payées */
+        .unpaid {
+            color: red; /* Couleur rouge pour les factures non payées */
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer le client secret depuis le modèle Twig
+    const clientSecret = '{{ clientSecret }}';
+
+    // Initialiser Stripe avec votre clé publique
+    const stripe = Stripe('{{ stripe_public_key }}');
+
+    // Créer un élément de paiement
+    const elements = stripe.elements();
+    const card = elements.create('card');
+
+    // Ajouter le formulaire de carte au DOM
+    card.mount('#card-element');
+
+    // Gérer la soumission du formulaire
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    // Inclure les détails de facturation du client si nécessaire
+                }
+            }
+        });
+
+        if (result.error) {
+            // Gérer les erreurs de paiement
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // Le paiement a été traité avec succès
+            // Afficher le message de confirmation et cacher le formulaire
+            document.getElementById('payment-form').style.display = 'none';
+            document.getElementById('confirmation-message').style.display = 'block';
+            console.log('Le paiement a été traité avec succès !');
+        }
+    });
+
+    // Envoyer une requête Ajax pour marquer la facture comme payée lors du chargement de la page
+    fetch('{{ path('app_facture_marquer_payee', { 'idFacture': facture.idfacture }) }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ payee: true })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La requête a échoué !');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de la requête:', error);
+    });
+});
+
+    </script>
+{% endblock %}

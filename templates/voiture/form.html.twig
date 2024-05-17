@@ -1,0 +1,38 @@
+
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.marque, 'Marque de la voiture', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+            <div class="alert alert-danger">
+                {{ form_errors(form.marque) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.model, 'Modèle de la voiture', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.model, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.model) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.couleur, 'Couleur de la voiture', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.couleur, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.couleur) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.matricule, 'Matricule de la voiture', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.matricule) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.idparking, 'Parking de la voiture', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.idparking, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.idparking) }}
+        </div>
+         <!-- Champ pour afficher les places disponibles -->
+         <div class="form-group">
+        {{ form_label(form.place_disponible, 'Places disponibles', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.place_disponible, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+         </div>
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>

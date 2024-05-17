@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Parking{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <h1>Nouveau Parking</h1>
+
+    <div class="container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.nom, 'Nom du parking', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.nom) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.nom) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.capacite, 'Capacité du parking', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.capacite, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.capacite) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.capacite) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.type, 'Type de parking', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.type) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.type) }}
+                </div>
+            {% endif %}
+        </div>
+       
+
+        <button type="submit" class="btn btn-primary">Créer</button>
+        {{ form_end(form) }}
+    </div>
+</main>
+{% endblock %}

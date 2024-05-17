@@ -1,0 +1,66 @@
+{% extends 'baseFront.html.twig' %}
+{% block title %}Liste des des factures {% endblock %}
+
+{% block body %}
+
+
+
+    <h1>Liste des factures</h1>
+
+<form action="{{ path('app_appartement_factures_Residen', {'idAppartement': appartement.idappartement}) }}" method="get">
+        <label for="type">Type de facture:</label>
+        <select name="type" id="type">
+            <option value="">Tous</option>
+            <option value="Gaz">Gaz</option>
+            <option value="Eau">Eau</option>
+       <option value="Electricite">Electricite</option>
+       <option value="Dechets">Dechets</option>
+
+            <!-- Ajoutez d'autres options de type de facture si nécessaire -->
+        </select>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro de facture</th>
+<th><a href="{{ path('app_appartement_factures_Residen', {'idAppartement': appartement.idappartement, 'sort_by': 'date', 'sort_order': (sortBy == 'date' and sortOrder == 'ASC') ? 'DESC' : 'ASC'}) }}">Date</a></th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Description</th>
+                <th>Consommation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for facture in factures %}
+            <tr>
+                <td>{{ facture.numfacture }}</td>
+                <td>{{ facture.date ? facture.date|date('Y-m-d') : '' }}</td>
+                <td>{{ facture.type }}</td>
+                <td>{{ facture.montant }}</td>
+                <td>{{ facture.descriptionFacture }}</td>
+                <td>{{ facture.consommation }}</td>
+                <td>
+                    <a href="{{ path('app_facture_show', {'idFacture': facture.idfacture}) }}">Voir</a>
+              
+                    <div class="download-btn">
+                        <a href="{{ path('app_facture_pdf', {'idFacture': facture.idfacture}) }}" class="btn btn-primary">PDF</a>
+                       <a href="{{ path('app_facture_paiement', {'idFacture': facture.idfacture}) }}" class="btn btn-primary">Payer</a>
+
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">Aucune facture trouvée</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

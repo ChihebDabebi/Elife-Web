@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Events{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Liste des Events</h1>
+
+        <!-- Recherche -->
+        <form action="{{ path('app_event_index') }}" method="get" class="mb-3">
+            <div class="form-row align-items-end">
+                <div class="col-md-6 mb-2">
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Rechercher...">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Tri -->
+        <form action="{{ path('app_event_index') }}" method="get" class="mb-3">
+            <div class="form-row align-items-end">
+                <div class="col-md-4 mb-2">
+                    <select name="orderBy" class="form-control form-control-sm">
+                        <option value="date">Date</option>
+                        <!-- Ajoutez d'autres options de tri si nécessaire -->
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <select name="order" class="form-control form-control-sm">
+                        <option value="ASC">Croissant</option>
+                        <option value="DESC">Décroissant</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Trier</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <p class="card-text"><strong>Date:</strong> {{ event.date ? event.date|date('Y-m-d') : 'Date non définie' }}</p>
+                            <p class="card-text"><strong>Nombre de personnes:</strong> {{ event.nbrPersonne }}</p>
+                            <p class="card-text"><strong>Liste des invités:</strong> {{ event.listeInvites }}</p>
+                            <p class="card-text"><strong>Espace:</strong> {{ event.Espace }}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{{ path('app_event_show', {'idevent': event.idevent}) }}" class="btn btn-primary" title="Voir">Voir</a>
+                                <a href="{{ path('app_event_edit', {'idevent': event.idevent}) }}" class="btn btn-secondary" title="Modifier">Modifier</a>
+                                <form action="{{ path('app_event_delete', {'idEvent': event.idevent}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.idevent) }}">
+                                    <button type="submit" class="btn btn-danger" title="Supprimer">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Traduction avec Google Translate -->
+        <div class="text-center mt-4">
+            <div id="google_translate_element"></div>  
+            <script type="text/javascript"> 
+                function googleTranslateElementInit() { 
+                    new google.translate.TranslateElement({pageLanguage: 'en'},  'google_translate_element'); 
+                } 
+            </script>  
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination justify-content-center mt-4">
+            {{ knp_pagination_render(events) }}
+        </div>
+    </div>
+</main>
+{% endblock %}

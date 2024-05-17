@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'Espace{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Détails de l'Espace</h1>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-md-4">Nom:</dt>
+                            <dd class="col-md-8">{{ espace.name }}</dd>
+                            
+                            <dt class="col-md-4">État:</dt>
+                            <dd class="col-md-8">{{ espace.etat }}</dd>
+                            
+                            <dt class="col-md-4">Capacité:</dt>
+                            <dd class="col-md-8">{{ espace.capacite }}</dd>
+                            
+                            <dt class="col-md-4">Description:</dt>
+                            <dd class="col-md-8">{{ espace.description }}</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_espace') }}" class="btn btn-primary">Retour à la liste</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'appartement{% endblock %}
+
+{% block body %}
+     <main id="main" class="main">
+
+    <h1>Détails de l'appartement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ appartement.idappartement }}</td>
+            </tr>
+            <tr>
+                <th>Numéro d'appartement</th>
+                <td>{{ appartement.numappartement }}</td>
+            </tr>
+            <tr>
+                <th>Nom du résident</th>
+                <td>{{ appartement.nomresident }}</td>
+            </tr>
+            <tr>
+                <th>Taille</th>
+                <td>{{ appartement.taille }}</td>
+            </tr>
+            <tr>
+                <th>Nombre d'étages</th>
+                <td>{{ appartement.nbretage }}</td>
+            </tr>
+            <tr>
+                <th>Statut de l'appartement</th>
+                <td>{{ appartement.statutappartement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_appartement_index') }}">Retour à la liste</a>
+    
+
+    <a href="{{ path('app_appartement_edit', {'idAppartement': appartement.idappartement}) }}">Modifier</a>
+ 
+        </main><!-- End #main -->
+
+
+{% endblock %}

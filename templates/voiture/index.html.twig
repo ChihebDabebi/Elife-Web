@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des Voitures
+{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <h1 class="text-center mb-4">Liste des Voitures</h1>
+
+        {# Formulaire de recherche #}
+        <form action="{{ path('app_voitures_search') }}" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher..." value="{{ searchTerm }}">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+
+        {# Menu déroulant pour le tri #}
+        <form action="{{ path('app_voitures_sort') }}" method="get" class="mb-3">
+            <div class="input-group">
+                <select name="sort_by" class="form-select">
+                    <option value="marque" {% if sortBy == 'marque' %}selected{% endif %}>Marque</option>
+                    <option value="model" {% if sortBy == 'model' %}selected{% endif %}>Modèle</option>
+                    <option value="couleur" {% if sortBy == 'couleur' %}selected{% endif %}>Couleur</option>
+                    <option value="matricule" {% if sortBy == 'matricule' %}selected{% endif %}>Matricule</option>
+                </select>
+                <select name="sort_order" class="form-select">
+                    <option value="ASC" {% if sortOrder == 'ASC' %}selected{% endif %}>Croissant</option>
+                    <option value="DESC" {% if sortOrder == 'DESC' %}selected{% endif %}>Décroissant</option>
+                </select>
+                <input type="hidden" name="search" value="{{ searchTerm }}">
+                <button type="submit" class="btn btn-primary">Trier</button>
+            </div>
+        </form>
+
+        {# Tableau des voitures #}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Marque</th>
+                        <th>Modèle</th>
+                        <th>Couleur</th>
+                        <th>Matricule</th>
+                        <th>Parking</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for voiture in voitures %}
+                        <tr>
+                            <td>{{ voiture.marque }}</td>
+                            <td>{{ voiture.model }}</td>
+                            <td>{{ voiture.couleur }}</td>
+                            <td>{{ voiture.matricule }}</td>
+                            <td>{{ voiture.idparking }}</td>
+                            <td>
+                                <a href="{{ path('app_voiture_show', {'idVoiture': voiture.idvoiture}) }}" class="btn btn-primary btn-sm">Voir</a>
+                                <a href="{{ path('app_voiture_edit', {'idVoiture': voiture.idvoiture}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                                <form method="post" action="{{ path('app_voiture_delete', {'idVoiture': voiture.idvoiture}) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voiture.idvoiture) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {# Affichage de la pagination #}
+        <div class="pagination">
+            {{ knp_pagination_render(voitures) }}
+        </div>
+    </div>
+</main>
+{% endblock %}

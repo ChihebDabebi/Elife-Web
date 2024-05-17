@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Comment{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <h1>Create new Comment</h1>
+
+    {# Display the list of reclamations in a table #}
+    <h2>Reclamations</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Image</th>
+                {# Add more columns as needed #}
+            </tr>
+        </thead>
+        <tbody>
+            {% for reclamation in reclamations %}
+                <tr>
+                    <td>{{ reclamation.descrirec }}</td>
+                    <td>{{ reclamation.daterec|date('Y-m-d') }}</td>
+                    <td>{{ reclamation.categorierec }}</td>
+                    <td>{{ reclamation.statutrec }}</td>
+                    <td>
+                        {% if reclamation.imagedata %}
+                            <img src="data:image/jpeg;base64,{{ reclamation.imagedata|base64_encode }}" alt="Reclamation Image" style="max-width: 100px; max-height: 100px;">
+                        {% else %}
+                            No image available
+                        {% endif %}
+                    </td>
+                    {# Add more columns as needed #}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# Include the comment form #}
+    {{ include('comment/_form.html.twig') }}
+
+    <a href="{{ path('app_comment_index') }}">back to list</a>
+    </main>
+{% endblock %}

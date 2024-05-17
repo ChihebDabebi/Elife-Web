@@ -1,0 +1,49 @@
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.numfacture, 'Numéro de facture') }}
+            {{ form_widget(form.numfacture, {'attr': {'class': 'form-control'}}) }}
+            <div class="alert alert-danger">
+                {{ form_errors(form.numfacture) }}
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.date, 'Date') }}
+            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.date) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.type, 'Type') }}
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.type) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.montant, 'Montant') }}
+            {{ form_widget(form.montant, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.montant) }}
+        </div>
+        <br>
+       <div class="form-group">
+        {{ form_label(form.descriptionFacture, 'Description de la facture') }}
+        {{ form_widget(form.descriptionFacture, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.descriptionFacture) }}
+    </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.consommation, 'Consommation') }}
+            {{ form_widget(form.consommation, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.consommation) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.idAppartement, 'Appartement') }}
+            {{ form_widget(form.idAppartement, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.idAppartement) }}
+        </div>
+        <br>
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

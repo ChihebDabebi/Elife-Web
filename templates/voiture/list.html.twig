@@ -1,0 +1,29 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Liste des Voitures{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mb-4">Liste des Voitures</h1>
+        <div class="row">
+            {% for voiture in voitures %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ voiture.marque }} - {{ voiture.model }}</h5>
+                            <p class="card-text"><strong>Couleur:</strong> {{ voiture.couleur }}</p>
+                            <p class="card-text"><strong>Matricule:</strong> {{ voiture.matricule }}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{{ path('app_voiture_edit_voiture', {'idVoiture': voiture.idVoiture}) }}" class="btn btn-primary" title="Modifier">Modifier</a>
+                                <a href="{{ path('app_voiture_deletevoiture', {'idVoiture': voiture.idVoiture}) }}" class="btn btn-danger" title="Supprimer">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ path('app_voiture_new') }}" class="btn btn-primary">Ajouter une voiture</a>
+        </div>
+    </div>
+{% endblock %}

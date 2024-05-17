@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Parkings{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <h1 class="text-center mb-4">Liste des Parkings</h1>
+
+
+        {# Formulaire de recherche #}
+        <form action="{{ path('app_parking_search') }}" method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher..." value="{{ searchTerm }}">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+
+        {# Menu déroulant pour le tri #}
+        <form action="{{ path('app_parking_sort') }}" method="get" class="mb-4">
+            <div class="input-group">
+                <select name="sort_by" class="form-select">
+                    <option value="nom" {% if sortBy == 'nom' %}selected{% endif %}>Nom</option>
+                    <option value="capacite" {% if sortBy == 'capacite' %}selected{% endif %}>Capacité</option>
+                    <option value="type" {% if sortBy == 'type' %}selected{% endif %}>Type</option>
+                    <option value="nombreactuelles" {% if sortBy == 'nombreactuelles' %}selected{% endif %}>Nombre actuel</option>
+                </select>
+                <select name="sort_order" class="form-select">
+                    <option value="ASC" {% if sortOrder == 'ASC' %}selected{% endif %}>Croissant</option>
+                    <option value="DESC" {% if sortOrder == 'DESC' %}selected{% endif %}>Décroissant</option>
+                </select>
+                <input type="hidden" name="search" value="{{ searchTerm }}">
+                <button type="submit" class="btn btn-primary">Trier</button>
+            </div>
+        </form>
+
+        {# Tableau de parkings #}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Capacité</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Nombre actuel</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for parking in parkings %}
+                                        <tr>
+                                            <td>{{ parking.nom }}</td>
+                                            <td>{{ parking.capacite }}</td>
+                                            <td>{{ parking.type }}</td>
+                                            <td>{{ parking.nombreactuelles }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="{{ path('app_parking_show', {'idParking': parking.idparking}) }}">Voir</a>
+                                                <a class="btn btn-secondary btn-sm" href="{{ path('app_parking_edit', {'idParking': parking.idparking}) }}">Modifier</a>
+                                                <form style="display: inline-block;" method="post" action="{{ path('app_parking_delete', {'idParking': parking.idparking}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce parking ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parking.idparking) }}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Afficher la pagination #}
+        <div class="pagination mt-4">
+            {{ knp_pagination_render(parkings) }}
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3">
+                <a class="btn btn-success btn-block" href="{{ path('app_parking_new') }}">Ajouter un Parking</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

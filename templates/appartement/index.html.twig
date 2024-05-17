@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des appartements
+{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        <h1>Liste des appartements</h1>
+
+    <!-- Formulaire de recherche -->
+<form action="{{ path('app_appartement_index') }}" method="get">
+    <input type="text" name="search" value="{{ search }}" placeholder="Rechercher par nom de résident ou numéro d'appartement">
+    <button type="submit">Rechercher</button>
+</form>
+
+        <!-- Tableau des appartements -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="{{ path('app_appartement_index', { 'sort_by': 'numappartement' }) }}">
+                            Numéro d'appartement
+                        </a>
+                    </th>
+                    <th>Nom du résident</th>
+                    <th>Taille</th>
+                    <th>Nombre d'étages</th>
+                    <th>Statut de l'appartement</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appartement in appartements %}
+                    <tr>
+                        <td>{{ appartement.numappartement }}</td>
+                        <td>{{ appartement.nomresident }}</td>
+                        <td>{{ appartement.taille }}</td>
+                        <td>{{ appartement.nbretage }}</td>
+                        <td>{{ appartement.statutappartement }}</td>
+                        <td>
+                            <a href="{{ path('app_appartement_show', {'idAppartement': appartement.idappartement}) }}">Voir</a>
+                            <a href="{{ path('app_appartement_edit', {'idAppartement': appartement.idappartement}) }}">Modifier</a>
+                            <a href="{{ path('app_appartement_delete', {'idAppartement': appartement.idappartement}) }}">Supprimer</a>
+                            <a href="{{ path('app_appartement_factures', {'idAppartement': appartement.idAppartement}) }}">Voir les factures</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Lien pour créer un nouvel appartement -->
+        <a href="{{ path('app_appartement_new') }}">Créer un nouvel appartement</a>
+        <a href="{{ path('stat') }}">Statistiques</a>
+
+    </main><!-- End #main -->
+{% endblock %}

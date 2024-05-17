@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer le parking {{ parking.idparking }}{% endblock %}
+
+{% block body %}
+    <h1>Supprimer le parking {{ parking.idparking }}</h1>
+    <p>Nom: {{ parking.nom }}</p>
+    <p>Capacité: {{ parking.capacite }}</p>
+    <p>Type: {{ parking.type }}</p>
+    <p>Nombre Actuel: {{ parking.nombreactuelles }}</p>
+
+    <p>Êtes-vous sûr de vouloir supprimer ce parking ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_parking_delete', {'idParking': parking.idparking}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parking.idparking) }}">
+    <button type="submit">Supprimer</button>
+</form>
+
+    <a href="{{ path('app_parking_show', {'idParking': parking.idparking}) }}">Annuler</a>
+{% endblock %}

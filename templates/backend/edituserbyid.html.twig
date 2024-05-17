@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Custom styles for the edit user page -->
+    <style>
+        .edit-user-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('back/img/gif.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 50px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .form-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #aaa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+     
+    </style>
+{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        <div class="pagetitle">
+        </div><!-- End Page Title -->
+
+        <div class="edit-user-container">
+            <div class="form-box">
+                <h2>Edit User</h2>
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="form-group">
+                    {{ form_row(form.nom, {'label': 'Nom'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.prenom, {'label': 'Prénom'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.number, {'label': 'Téléphone'}) }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form_row(form.mail, {'label': 'Email'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.role, {'label': 'Rôle'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.update, {'attr': {'class':'button'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

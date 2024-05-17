@@ -1,0 +1,117 @@
+
+{% extends 'log.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<main>
+ <div class="container">
+
+ <style>
+  .position-absolute {
+  position: absolute;
+  top: 55%; /* Adjust as needed */
+  right: 55%; /* Adjust as needed */
+  transform: translate(-50%, -50%); /* May not be necessary anymore */
+  }
+
+  .position-absolute img {
+  height: 100%; /* Make the GIF fill the entire height */
+  }
+
+.captcha-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  font-size: 18px; /* Increase the font size to 18 pixels */
+  text-align: center;
+}
+ </style>
+
+ <div class="position-absolute">
+  <img src="{{ asset('back/img/giphy.gif') }}" alt="GIF" width="400">
+ </div>
+
+ <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+  <div class="container">
+  <div class="row justify-content-center">
+   <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+   <div class="d-flex justify-content-center py-4">
+    <img src="{{ asset('assets/img/logo.png') }}" alt="">
+    
+    </a>
+   </div>    <div class="card mb-3">
+
+    <div class="card-body">
+
+    <div class="pt-4 pb-2">
+<h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+<p class="text-center small">Enter your email & password to login</p>
+    </div>
+
+<div class="container-fluid p-0 mb-5">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- LogIn Start -->
+                <div class="wrapper">
+                    <div class="form-box">
+                      
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <form method="post">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="inputEmail" class="form-label">Email</label>
+                                    <div class="input-group has-validation">
+                                        <input type="email" value="{{ last_username }}" name="mail" class="form-control" id="inputEmail" required>
+                                        <div class="invalid-feedback">Please enter your email.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control" id="inputPassword" required>
+                                    <div class="invalid-feedback">Please enter your password!</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="captcha-box">
+                                        <p>Enter the captcha below:</p>
+                                        <p><del>{{ captcha }}</del></p>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <input type="text" name="captcha" class="form-control" id="inputCaptcha" required>
+                                        <div class="invalid-feedback">Please enter the captcha.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100" type="submit">Login</button>
+                                </div>
+                                <div class="col-12">
+                                    <p class="small mb-0">Don't have account? <a href="{{ path('utilisateurSignUp') }}">Create an account</a></p>
+                                    <p class="small mb-0">Forgot password? <button class="btn btn-link" onclick="location.href='{{ path('app_forgot_password_request') }}'">Reset password</button></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- LogIn End  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--... -->
+</div>
+{% endblock %}

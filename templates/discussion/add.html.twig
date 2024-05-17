@@ -1,0 +1,17 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Discussion{% endblock %}
+
+{% block body %}
+     <main id="main" class="main">
+
+    <h1>Create new Discussion</h1>
+
+    <div>
+        {{ include('discussion/AddDiscussion.html.twig') }}
+    </div>
+
+    <a href="{{ path('list_discussions') }}">Go to List</a>
+            </main>
+
+{% endblock %}

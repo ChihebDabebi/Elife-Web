@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+    <style>
+        .backg {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .vb {
+            max-width: 1051px;
+            margin: 0 auto;
+        }
+
+        .stack-pane {
+            padding: 10px 0;
+        }
+
+        .text {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .search-field {
+            height: 40px;
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .button {
+            height: 40px;
+            min-width: 150px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            background-color: #3e08d3;
+            color: #fff;
+        }
+          .button_delete {
+            height: 40px;
+            min-width: 150px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            background-color: red;
+            color: #fff;
+        }
+
+        .button:hover {
+            background-color: #2d0675;
+        }
+        /* Pagination styles for table */
+.knp-pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.knp-pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.knp-pagination li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.knp-pagination li a,
+.knp-pagination li span {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.knp-pagination li a:hover {
+    background-color: #e0e0e0;
+}
+
+.knp-pagination .active a,
+.knp-pagination .active span {
+    background-color: #3e08d3;
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <div class="backg vb">
+        <div class="stack-pane">
+            <h1 class="text">Listes des discussions</h1>
+        </div>
+        <div class="stack-pane">
+            <input type="text" id="rechercheField" class="search-field" placeholder="Rechercher une discussion" />
+        </div>
+        <div class="stack-pane">
+            <h1>Discussions : ({{ discussions.getTotalItemCount }})</h1>
+
+            <table id="table" class="table">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Créateur</th>
+                        <th>Date de Création</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for discussion in discussions %}
+                <tbody>
+                    <tr>
+                        <td>{{discussion.titre}}</td>
+                        <td>{{discussion.createur.getNom()}}</td>
+                        <td>{{discussion.dateCreation|date('Y-m-d   H:i:s')}}</td>
+                        <td><button class="button" type="button"><a class="button" href="{{ path('add_message', {id: discussion.id})}}">Open</a></button>
+                            {% if connectedUser == discussion.createur %}
+                            <button onclick="confirmDelete('{{ path('delete_discussion', {'idDiscussion': discussion.id}) }}')" class="button" style="background-color:red;">Delete</button>
+                            {% endif %}
+                    </tr>      
+                </tbody>
+                {% endfor %}
+            </table>
+                {{ knp_pagination_render(discussions) }}
+
+        </div>
+        <div class="stack-pane">
+            <button id="redirectToAjout" class="button"><a class="button" href="{{ path ('add_discussion') }}">Ajouter une discussion</a></button>
+        </div>
+        
+    </div>
+    <script>
+    function confirmDelete(deleteUrl) {
+        if (confirm('Are you sure you want to delete this discussion?')) {
+            window.location.href = deleteUrl;
+        }
+    }
+</script>
+<script>
+const searchField = document.getElementById('rechercheField');
+searchField.addEventListener('input', handleSearch);
+function handleSearch() {
+    const searchTerm = searchField.value.toLowerCase();
+    const discussionRows = document.querySelectorAll('#table tbody tr');
+
+    discussionRows.forEach((row) => {
+        const title = row.querySelector('td:first-child').textContent.toLowerCase();
+        const creator = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || creator.includes(searchTerm)) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+
+
+</script>
+<script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+</body>
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+</html>

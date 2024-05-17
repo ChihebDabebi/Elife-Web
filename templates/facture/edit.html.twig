@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Facture{% endblock %}
+
+{% block body %}
+     <main id="main" class="main">
+
+    <h1>Update Facture</h1>
+
+    <div>
+        {{ include('facture/_form.html.twig') }}
+    </div>
+
+ <a href="{{ path('app_appartement_factures', {'idAppartement': appartement.idAppartement}) }}">Back</a>
+            </main><!-- End #main -->
+
+{% endblock %}

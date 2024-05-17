@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la facture{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+
+        <h1>Détails de la facture</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Numéro de facture</th>
+                    <td>{{ facture.numfacture }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ facture.date|date('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ facture.type }}</td>
+                </tr>
+                <tr>
+                    <th>Montant</th>
+                    <td>{{ facture.montant }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ facture.descriptionFacture }}</td>
+                </tr>
+                <tr>
+                    <th>Consommation</th>
+                    <td>{{ facture.consommation }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+ <a href="{{ path('app_appartement_factures', {'idAppartement': appartement.idAppartement}) }}">Back</a>
+    </main><!-- End #main -->
+{% endblock %}

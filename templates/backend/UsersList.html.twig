@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of Users{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+      .card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      .card-header {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+      .card-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+      .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+      .table-bordered th,.table-bordered td {
+            border: 1px solid #ddd;
+        }
+      .bi {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+      .btn-added {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+      .btn-added:hover {
+            background-color: #3e8e41;
+        }
+       /* Add styles for the little man icon */
+      .little-man {
+            width: 50px;
+            height: 50px;
+            background-color: #f7f7f7;
+            border-radius: 50%;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+      .little-man svg {
+            width: 100%;
+            height: 100%;
+            fill: #333;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">List of Users</h1>
+                        <div class="little-man">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>N° ID</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Number</th>
+                                    <th>Mail</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in table %}
+                                <tr>
+                                    <td>{{i.getId()}}</td>
+                                    <td>{{i.getNom()}}</td>
+                                    <td>{{i.getPrenom()}}</td>
+                                    <td>{{i.getNumber()}}</td>
+                                    <td>{{i.getMail()}}</td>
+                                    <td>{{i.getRole()}}</td>
+                                    <td>
+                                        <a class="me-3" href="{{path('editUser',{'id':i.id})}}">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a href="{{path('deleteUser',{'id':i.id})}}">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('addUser') }}" class="btn btn-added">Add User</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

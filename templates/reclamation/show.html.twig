@@ -1,0 +1,43 @@
+{% extends  'baseFront.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idrec</th>
+                <th>Descrirec</th>
+                <th>Daterec</th>
+                <th>Categorierec</th>
+                <th>Statutrec</th>
+                <th>Imagedata</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ reclamation.idrec }}</td>
+                <td>{{ reclamation.descrirec }}</td>
+                <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.categorierec }}</td>
+                <td>{{ reclamation.statutrec }}</td>
+                <td>
+                    {% if reclamation.imagedata %}
+                        <img src="data:image/jpeg;base64,{{ reclamation.imagedata|base64_encode }}" alt="Reclamation Image">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_reclamation_edit', {'idrec': reclamation.idrec}) }}" class="btn btn-primary" style="transition: all 0.3s ease;">Edit</a>
+                    <a href="{{ path('app_reclamation_delete', {'idrec': reclamation.idrec}) }}" class="btn btn-danger" style="transition: all 0.3s ease;">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_index') }}" class="btn btn-secondary" style="transition: all 0.3s ease;">Back to list</a>
+{% endblock %}

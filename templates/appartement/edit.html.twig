@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Appartement{% endblock %}
+
+{% block body %}
+     <main id="main" class="main">
+
+    <h1>Create new Appartement</h1>
+
+    <div>
+        {{ include('appartement/_form.html.twig') }}
+    </div>
+
+    <a href="{{ path('app_appartement_index') }}">Back to List</a>
+            </main><!-- End #main -->
+
+{% endblock %}

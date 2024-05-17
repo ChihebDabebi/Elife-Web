@@ -1,0 +1,16 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New event{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Create new event</h1>
+
+    <div>
+        {{ include('event/form.html.twig') }}
+    </div>
+
+    <a href="{{ path('app_event_index') }}">Back to List</a>
+    </main>
+{% endblock %}

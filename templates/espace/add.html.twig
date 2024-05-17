@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New espace{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Create new espace</h1>
+
+    <div>
+        {{ include('espace/form.html.twig') }}
+    </div>
+
+    <a href="{{ path('app_espace') }}">Back to List</a>
+    </main>
+{% endblock %}

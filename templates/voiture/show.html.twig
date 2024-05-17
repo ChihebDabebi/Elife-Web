@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Détails de la voiture
+{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Détails de la voiture :</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-text">Marque: {{ voiture.marque }}</h5>
+                        <h5 class="card-text">Modèle: {{ voiture.model }}</h5>
+                        <h5 class="card-text">Couleur: {{ voiture.couleur }}</h5>
+                        <h5 class="card-text">Matricule: {{ voiture.matricule }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

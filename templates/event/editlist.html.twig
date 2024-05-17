@@ -1,0 +1,44 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Modifier l'Événement{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Modifier l'événement :</h3>
+                    </div>
+                    <div class="card-body">
+                        {# Vérifiez si l'objet formulaire est transmis correctement #}
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_label(form.title, 'Titre de l\'événement', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.date, 'Date de l\'événement', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.nbrPersonne, 'Nombre de personnes', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.nbrPersonne, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.listeInvites, 'Liste des invités', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.listeInvites, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                     
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

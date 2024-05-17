@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier de l'Espace {{ espace.getName() }}{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <h2>{{ espace.getName() }}</h2>
+
+    <div id="calendar-holder">
+    </div>
+
+    <!-- Script JavaScript pour initialiser le calendrier avec FullCalendar -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            // Récupération de l'élément HTML qui contiendra le calendrier
+            var calendarEl = document.getElementById('calendar-holder');
+
+            // Initialisation du calendrier avec FullCalendar
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC', // Configuration du fuseau horaire
+                events: {{ events|raw }}, // Récupération des événements au format JSON
+                header: { // Configuration de l'en-tête du calendrier
+                    left: 'prev,next today', // Boutons précédent, suivant et aujourd'hui
+                    center: 'title', // Titre affichant le mois/la semaine/le jour actuel
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay', // Sélecteurs de vue
+                },
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // Activation des plugins
+            });
+
+            // Rendu du calendrier
+            calendar.render();
+        });
+    </script>
+</main>
+{% endblock %}

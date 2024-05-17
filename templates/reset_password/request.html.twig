@@ -1,0 +1,74 @@
+{% extends 'log.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+<style>
+    /* Add only the necessary styles here */
+   .wrapper {
+        position: relative;
+        width: 460px;
+        height: 500px;
+        background: transparent;
+        border: 2px solid rgba(255,255,255,.5);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 30px rgba(0, 0, 0,.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+   .form-box {
+        width: 100%;
+        padding: 40px;
+    }
+
+   .input-box {
+        transform: translateY(50%);
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border-bottom: 2px solid #FEA116;
+        margin: 20px 0;
+    }
+
+   .input-box label {
+        position: absolute;
+        top: 20%;
+        left: 5px;
+        transform: translateY(-50%);
+        font-size: 1em;
+        color: #FEA116;
+        font-weight: 500;
+        pointer-events: none;
+        transition:.5s;
+    }
+
+   .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        transform: translateY(90%);
+        border: none;
+        outline: none;
+        font-size: 1em;
+        color: #FEA116;
+        font-weight: 600;
+        padding: 0 35px 0 5px;
+    }
+</style>
+
+<div class="wrapper">
+    <div class="form-box">
+        <h2>Reset password</h2>
+        {{ form_start((requestForm) ) }}
+            <div class="input-box">
+                <label>mail address</label>
+                {{ form_widget(requestForm.mail, {'attr': {'class': 'input-box'}}) }}
+            </div>
+            <button class="btn btn-primary">Send password reset mail</button>
+        {{ form_end((requestForm) ) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Détails de l'appartement{% endblock %}
+
+{% block body %}
+        <h1>Détails de l'appartement</h1>
+
+        <dl>
+            <dt>Numéro d'appartement:</dt>
+            <dd>{{ appartement.numappartement }}</dd>
+            <dt>Nom du résident:</dt>
+            <dd>{{ appartement.nomresident }}</dd>
+            <dt>Taille:</dt>
+            <dd>{{ appartement.taille }}</dd>
+            <dt>Nombre d'étages:</dt>
+            <dd>{{ appartement.nbretage }}</dd>
+            <dt>Statut de l'appartement:</dt>
+            <dd>{{ appartement.statutappartement }}</dd>
+            <!-- Ajoutez d'autres détails de l'appartement selon vos besoins -->
+        </dl>
+
+        <!-- Ajoutez d'autres éléments HTML ou fonctionnalités si nécessaire -->
+
+        <a href="{{ path('app_appartement_for_user') }}">Retour à la liste des appartements</a>
+{% endblock %}

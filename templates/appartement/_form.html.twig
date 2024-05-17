@@ -1,0 +1,42 @@
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.numappartement, 'Numéro d\'appartement') }}
+            {{ form_widget(form.numappartement, {'attr': {'class': 'form-control'}}) }}
+            <div class="alert alert-danger">
+                {{ form_errors(form.numappartement) }}
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.nomresident, 'Nom du résident') }}
+            {{ form_widget(form.nomresident, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nomresident) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.taille, 'Taille') }}
+            {{ form_widget(form.taille, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.taille) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.nbretage, 'Nombre d\'étages') }}
+            {{ form_widget(form.nbretage, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nbretage) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.statutappartement, 'Statut de l\'appartement') }}
+            {{ form_widget(form.statutappartement, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.statutappartement) }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.id, 'Le Resident') }}
+            {{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.id) }}
+        </div>
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

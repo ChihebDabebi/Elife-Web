@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Espaces{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Liste des Espaces</h1>
+
+        <!-- Recherche et Tri -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <form action="{{ path('app_espace') }}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="searchTerm" class="form-control" placeholder="Rechercher...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form action="{{ path('app_espace') }}" method="get">
+                    <div class="form-row">
+                        <div class="col-md-5">
+                            <select name="orderBy" class="form-control">
+                                <option value="name">Nom</option>
+                                <!-- Ajoutez d'autres options de tri si nécessaire -->
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <select name="order" class="form-control">
+                                <option value="ASC">Croissant</option>
+                                <option value="DESC">Décroissant</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-block">Trier</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for espace in espaces %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ espace.name }}</h5>
+                            <p class="card-text"><strong>État:</strong> {{ espace.etat }}</p>
+                            <p class="card-text"><strong>Capacité:</strong> {{ espace.capacite }}</p>
+                            <p class="card-text"><strong>Description:</strong> {{ espace.description }}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{{ path('app_espace_show', {'idEspace': espace.idEspace}) }}" class="btn btn-primary" title="Voir">Voir</a>
+                                <a href="{{ path('app_espace_edit', {'idEspace': espace.idEspace}) }}" class="btn btn-secondary" title="Modifier">Modifier</a>
+                                <form action="{{ path('app_espace_delete', {'idEspace': espace.idEspace}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet espace ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger" title="Supprimer">Supprimer</button>
+                                </form>
+                                <a href="{{ path('app_espace_calendar', {'idEspace': espace.idEspace}) }}" class="btn btn-info" title="Voir Calendrier">Voir Calendrier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Traduction avec Google Translate -->
+        <div class="text-center mt-4">
+            <div id="google_translate_element"></div>  
+            <script type="text/javascript"> 
+                function googleTranslateElementInit() { 
+                    new google.translate.TranslateElement({pageLanguage: 'en'},  'google_translate_element'); 
+                } 
+            </script>  
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination justify-content-center mt-4">
+            {{ knp_pagination_render(espaces) }}
+        </div>
+    </div>
+</main>
+{% endblock %}

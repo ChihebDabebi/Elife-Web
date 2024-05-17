@@ -1,0 +1,16 @@
+app_forgot_password_request:
+    path: /reset-password/request
+    controller: App\Controller\ResetPasswordController::request
+
+app_check_email:
+    path: /reset-password/check-email
+    controller: App\Controller\ResetPasswordController::checkEmail
+
+app_reset_password:
+    path: /reset-password/{mail}
+    controller: App\Controller\ResetPasswordController::reset
+    
+app_comment_reclamation:
+    path: '/reclamation/{reclamation_id}/comments'
+    controller: 'App\Controller\CommentController::showReclamationComments'
+    methods: ['GET']

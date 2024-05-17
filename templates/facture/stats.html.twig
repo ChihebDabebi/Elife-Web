@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la facture{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        <div class="my-4 text-center">
+            <hr class="my-4"> <!-- Barre horizontale décorative -->
+            <h3>Statistiques</h3> <!-- Titre pour séparer visuellement -->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Consommation totale: {{ consommationTotale }}</h4>
+                </div>
+                <div class="col-md-6">
+                    <h4>Montant total: {{ montantTotal }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphique en barres -->
+        <div class="container">
+            <canvas id="facturesChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Graphique en cercles -->
+        <div class="container">
+            <canvas id="cerclesChart" width="400" height="200"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Graphique en barres
+                var ctx = document.getElementById('facturesChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for facture in factures %}
+                                "{{ facture.getNumFacture() }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'Consommation',
+                            data: [
+                                {% for facture in factures %}
+                                    {{ facture.getConsommation() }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Montant',
+                            data: [
+                                {% for facture in factures %}
+                                    {{ facture.getMontant() }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Graphique en cercles
+                var ctxCercles = document.getElementById('cerclesChart').getContext('2d');
+                var myChartCercles = new Chart(ctxCercles, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for facture in factures %}
+                                "{{ facture.getNumFacture() }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'Consommation',
+                            data: [
+                                {% for facture in factures %}
+                                    {{ facture.getConsommation() }},
+                                {% endfor %}
+                            ],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: false
+                        },
+                        {
+                            label: 'Montant',
+                            data: [
+                                {% for facture in factures %}
+                                    {{ facture.getMontant() }},
+                                {% endfor %}
+                            ],
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </main><!-- End #main -->
+{% endblock %}

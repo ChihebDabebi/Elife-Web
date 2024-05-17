@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <style>
+        /* Basic styling for the chat container */
+        .chat-container {
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        /* Styling for the chat messages list */
+        .chat-messages {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Styling for individual chat messages */
+        .chat-message {
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the input field */
+        .chat-input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Styling for buttons */
+        .chat-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <ul class="chat-messages">
+            <!-- Display chat messages here -->
+            <li class="chat-message">User: Hello!</li>
+            <li class="chat-message">Assistant: Hi there!</li>
+            <!-- Add more messages dynamically using JavaScript -->
+        </ul>
+        <input type="text" class="chat-input" placeholder="Type your message...">
+        <button class="chat-button">Send</button>
+        <button class="chat-button">Select Image</button>
+        <button class="chat-button">Select Emoji</button>
+    </div>
+</body>
+</html>

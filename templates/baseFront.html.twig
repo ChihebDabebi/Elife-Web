@@ -1,0 +1,225 @@
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+                      {% block stylesheets %}
+
+
+ <link href="{{ asset('Front/vendor/animate.css/animate.min.css') }}" rel="stylesheet">">
+  <link href="{{ asset('Front/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('Front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('Front/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('Front/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('Front/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('Front/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+    <link href="{{ asset('Front/css/style.css') }}" rel="stylesheet">
+ {% endblock %}
+      {% block javascripts %}
+  <!-- Vendor JS Files -->
+            <script src="{{ asset('Front/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+            <script src="{{ asset('Front/vendor/aos/aos.js') }}"></script>
+            <script src="{{ asset('Front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('Front/vendor/glightbox/js/glightbox.min.js') }}"></script>
+            <script src="{{ asset('Front/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+            <script src="{{ asset('Front/vendor/swiper/swiper-bundle.min.js') }}"></script>
+            <script src="{{ asset('Front/vendor/waypoints/noframework.waypoints.js') }}"></script>
+            <script src="{{ asset('Front/vendor/php-email-form/validate.js') }}"></script>
+
+
+  <!-- Template Main JS File -->
+              <script src="{{ asset('Front/js/main.js') }}"></script>
+           <!-- Scripts reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- Fin des scripts reCAPTCHA -->
+{% endblock %}
+
+
+
+</head>
+<body>
+  {% block header %}
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="logo">
+          <h1 class="text-light"><a href="{{ path('app_d3') }}"><span>Elife</span></a></h1>
+        </div>
+        <nav id="navbar" class="navbar">
+        
+        <ul>
+          <li><a class="active " href="{{ path('app_d3') }}">Home</a></li>
+          <li><a href="{{ path('app_event_new') }}">Réservez un espace</a></li>
+          <li><a href="{{ path('app_appartement_for_user') }}">Consulter mes factures </a></li>
+          <li><a href="{{ path('app_voiture_new') }}">Parking</a></li>
+          <li><a href="{{ path('add_discussion') }}">Messagerie</a></li>
+          <li><a href="{{ path('app_reclamation_new') }}">Réclammation</a></li>
+          <li><a href="{{ path('app_logout')}}">Logout</a></li>
+
+         
+
+                   <li><a href="{{ path('app_login')}}">Login</a></li>
+         
+
+        </ul>
+        
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+   {% endblock %}
+        {% block Section %}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Bienvenue à <span>Elife</span></h2>
+          <p class="animate__animated animate__fadeInUp">Dans un monde de plus en plus connecté, notre solution vise à simplifier et améliorer votre  vie quotidienne au sein de votre  résidence </p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown"> Simplifiez votre quotidien, vivez Smart</h2>
+          <p class="animate__animated animate__fadeInUp">Gérez votre domicile en toute simplicité, où que vous soyez</p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Gérez Votre Résidence à Portée de Main.</h2>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+   {% endblock %}
+
+
+ 
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  {% block body %}
+
+
+
+{% endblock %}
+
+    {% block footer %}
+    <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+  
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+           <li><a class="active " href="{{ path('app_d3') }}">Home</a></li>
+          <li><a href="{{ path('app_event_new') }}">Réservez un espace</a></li>
+          <li><a href="{{ path('app_appartement_for_user') }}">Consulter mes factures </a></li>
+          <li><a href="{{ path('app_voiture_new') }}">Parking</a></li>
+          <li><a href="{{ path('add_discussion') }}">Messagerie</a></li>
+          <li><a href="{{ path('app_reclamation_new') }}">Réclammation</a></li>
+
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+             WirelesSolution Elife <br>
+              ZI Choutrana 2 - Pôle technologique Al<br>
+              Tunisie <br><br>
+              <strong>Phone:</strong>+216 95 374 008<br>
+              <strong>Email:</strong>WirelesSolution@gmail.com<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>About Elife</h3>
+            <p>Facilitez la gestion de votre domicile grâce à notre application tout-en-un ! Réservez les lieux communs, suivez votre consommation d'énergie, signalez les réparations et restez en contact avec vos voisins en toute simplicité. Une solution intuitive pour rendre votre vie résidentielle plus fluide et connectée.</p>
+            <div class="social-links mt-3">
+              <a href="https://www.facebook.com/profile.php?id=100009394455324" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=100009394455324" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=100009394455324" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=100009394455324" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        © Copyright <strong><span>WirelesSolution</span></strong>. All Rights Reserved
+      </div>
+     
+    
+  </footer>
+  {% endblock %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Fonction pour mettre à jour les places disponibles
+    function updateAvailablePlaces() {
+        // Récupérer l'identifiant du parking sélectionné
+        var selectedParkingId = document.getElementById('voiture_idparking').value;
+
+        // Effectuer une requête AJAX pour récupérer les détails du parking
+        fetch('/parking/' + selectedParkingId + '/details')
+            .then(response => response.json())
+            .then(data => {
+                // Mettre à jour la valeur de l'input des places disponibles
+                document.getElementById('voiture_place_disponible').value = data.availablePlaces;
+            })
+            .catch(error => console.error('Une erreur s\'est produite : ', error));
+    }
+
+    // Écouter les changements dans la sélection du parking
+    document.getElementById('voiture_idparking').addEventListener('change', updateAvailablePlaces);
+
+    // Appeler la fonction updateAvailablePlaces au chargement de la page pour afficher les places disponibles initiales
+    updateAvailablePlaces();
+});
+
+</script>
+
+</body></html>

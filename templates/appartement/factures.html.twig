@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des appartements{% endblock %}
+
+{% block body %}
+
+ <main id="main" class="main">
+
+        <h1>Liste des factures</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Numéro de facture</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Description</th>
+                    <th>Consommation</th>
+                    <th>Appartement</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for facture in factures %}
+                <tr>
+                    <td>{{ facture.numfacture }}</td>
+                    <td>{{ facture.date ? facture.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ facture.type }}</td>
+                    <td>{{ facture.montant }}</td>
+                    <td>{{ facture.descriptionFacture }}</td>
+                    <td>{{ facture.consommation }}</td>
+                    <td>{{ facture.idappartement is not null ? facture.idappartement.numappartement : '' }}</td> {# Ajoutez cette vérification #}
+                    <td>
+                        <a href="{{ path('app_facture_show', {'idFacture': facture.idfacture}) }}">Voir</a>
+                        <a href="{{ path('app_facture_edit', {'idFacture': facture.idfacture}) }}">Modifier</a>
+                      <a href="{{ path('app_facture_delete', {'idfacture': facture.idfacture}) }}">Supprimer</a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucune facture trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_facture_new') }}">Créer une nouvelle facture</a>
+        <a href="{{ path('app_appartement_index') }}">Back to List</a>
+
+    </main><!-- End #main -->
+{% endblock %}

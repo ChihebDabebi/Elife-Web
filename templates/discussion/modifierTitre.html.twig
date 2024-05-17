@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    
+    .backg {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vb {
+    max-width: 1051px;
+    margin: 0 auto;
+}
+
+.stack-pane {
+    padding: 10px 0;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+}
+
+.title-label {
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-style: italic;
+}
+
+.text-field1 {
+    height: 25px;
+    width: 422px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.error-label {
+    color: red;
+}
+
+.button {
+    height: 40px;
+    min-width: 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    background-color: #3e08d3;
+    color: #fff;
+}
+
+.button:hover {
+    background-color: #2d0675;
+}
+
+    
+</style>
+</head>
+<body>
+    <div class="backg vb">
+        <div class="stack-pane">
+            <h1>Modifier la discussion</h1>
+        </div>
+        <label class="title-label">Titre :</label>
+        <div class="stack-pane">
+            <input type="text" id="titreMod" class="text-field1" />
+        </div>
+        <div class="stack-pane">
+            <label id="error" class="error-label"></label>
+        </div>
+        <label class="title-label">Description :</label>
+        <div class="stack-pane">
+            <input type="text" id="descriptionMod" class="text-field1" />
+        </div>
+        <div class="stack-pane">
+            <label id="error2" class="error-label"></label>
+        </div>
+        <div class="stack-pane">
+            <input type="color" id="color" class="button" />
+        </div>
+        <div class="stack-pane">
+            <button id="modifierTitre" class="button" onclick="modifierTitre()">Modifier</button>
+        </div>
+        <div class="stack-pane">
+            <button id="retour" class="button" onclick="retour()"><a href="javascript:history.go(-1)">Retour</a></button>
+        </div>
+    </div>
+</body>
+</html>

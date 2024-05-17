@@ -1,0 +1,116 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Nouvelle Voiture{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <h1 class="text-center">Nouvelle Voiture</h1>
+
+    <div class="container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.marque, 'Marque ', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+                    {% if form_errors(form.marque) %}
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ form_errors(form.marque) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.model, 'Modèle ', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.model, {'attr': {'class': 'form-control'}}) }}
+                    {% if form_errors(form.model) %}
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ form_errors(form.model) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.couleur, 'Couleur ', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.couleur, {'attr': {'class': 'form-control'}}) }}
+                    {% if form_errors(form.couleur) %}
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ form_errors(form.couleur) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.matricule, 'Matricule ', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}
+                    {% if form_errors(form.matricule) %}
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ form_errors(form.matricule) }}
+                        </div>
+                    {% endif %}
+                    {% for flashType, flashMessages in app.flashes %}
+                        {% for flashMessage in flashMessages %}
+                            {% if flashType == 'error' %}
+                                <div class="alert alert-danger mt-2">
+                                    <i class="fas fa-exclamation-circle"></i> {{ flashMessage }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.idparking, 'Parking ', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.idparking, {'attr': {'class': 'form-control', 'onchange': 'updateAvailablePlaces(this.value)'}}) }}
+                    {{ form_errors(form.idparking) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.place_disponible, 'Places disponibles', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.place_disponible, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'id': 'place-disponible'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <!-- Intégration de reCAPTCHA -->
+                    <div class="g-recaptcha" data-sitekey="6Le5wsUpAAAAABwJZOgST880D7Jk0NfhYgt_PdKw" style="margin-top: 20px;"></div>
+                    <!-- Fin de l'intégration de reCAPTCHA -->
+                    <!-- Affichage du message d'erreur du CAPTCHA -->
+                    {% for flashType, flashMessages in app.flashes %}
+                        {% for flashMessage in flashMessages %}
+                            {% if flashType == 'captcha_error' %}
+                                <div class="alert alert-danger mt-2">
+                                    <i class="fas fa-exclamation-circle"></i> {{ flashMessage }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    <!-- Fin de l'affichage du message d'erreur du CAPTCHA -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary mt-3 mr-2">Ajouter</button>
+                        <!-- Ajout du bouton "Consulter mes voitures" -->
+                        <a href="{{ path('app_voitures_list') }}" class="btn btn-secondary mt-3">Consulter mes voitures</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+       
+    </div>
+</main>
+{% endblock %}

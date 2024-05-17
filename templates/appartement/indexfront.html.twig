@@ -1,0 +1,57 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Liste des appartements{% endblock %}
+
+{% block body %}
+ 
+    <main id="main" class="main">
+
+        <h1>Liste des appartements</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Numéro d'appartement</th>
+                    <th>Nom du résident</th>
+                    <th>Taille</th>
+                    <th>Nombre d'étages</th>
+                    <th>Statut de l'appartement</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for appartement in appartements %}
+                <tr>
+                    <td>{{ appartement.numappartement }}</td>
+                    <td>{{ appartement.nomresident }}</td>
+                    <td>{{ appartement.taille }}</td>
+                    <td>{{ appartement.nbretage }}</td>
+                    <td>{{ appartement.statutappartement }}</td>
+                   <td>
+                            <button onclick="window.location.href='{{ path('app_appartement_details', {'idAppartement': appartement.idappartement})
+                             }}'" class="btn btn-primary">Voir</button>
+                                                     </td>
+                   <td>
+
+                            <button onclick="window.location.href='{{ path('app_appartement_factures_Residen', {'idAppartement': appartement.idappartement }) }}'" class="btn btn-warning">Factures Non Payées</button>
+                                            </td>
+        
+                   <td>
+
+                            <button onclick="window.location.href='{{ path('app_appartement_factures_payees', {'idAppartement': appartement.idappartement }) }}'" class="btn btn-success">Factures Payées</button>
+                        </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+        <button onclick="window.location.href='{{ path('statistique') }}'" class="btn btn-success ">Statistiques</button>
+
+    </main><!-- End #main -->
+
+
+{% endblock %}

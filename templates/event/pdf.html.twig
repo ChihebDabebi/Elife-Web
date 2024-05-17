@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de l'événement</title>
+    <!-- Ajout du CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <!-- Police d'écriture -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #343a40;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #007bff;
+        }
+        .event-details {
+            margin-bottom: 30px;
+        }
+        .event-details p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Détails de l'événement</h1>
+        </div>
+        <div class="event-details">
+            <p><strong>Titre:</strong> {{ event.title }}</p>
+            <p><strong>Date:</strong> {{ event.date ? event.date|date('d/m/Y') : 'Date non définie' }}</p>
+            <p><strong>Nombre de personnes:</strong> {{ event.nbrPersonne }}</p>
+            <p><strong>Description:</strong> {{ event.listeInvites }}</p>
+            <p><strong>Espace:</strong> {{ event.Espace }}</p>
+        </div>
+        <div class="footer">
+            <p>© {{ 'now'|date('Y') }} WirelessSolution Elife.</p>
+        </div>
+    </div>
+    <!-- Inclusion des bibliothèques JavaScript Bootstrap et jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Supprimer la voiture {{ voiture.idvoiture }}{% endblock %}
+
+{% block body %}
+    <h1>Supprimer la voiture {{ voiture.idvoiture }}</h1>
+    <p>Marque: {{ voiture.marque }}</p>
+    <p>Modèle: {{ voiture.model }}</p>
+    <p>Couleur: {{ voiture.couleur }}</p>
+    <p>Matricule: {{ voiture.matricule }}</p>
+
+    <p>Êtes-vous sûr de vouloir supprimer cette voiture ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_voiture_delete', {'idVoiture': voiture.idvoiture}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voiture.idvoiture) }}">
+    <button type="submit">Supprimer</button>
+</form>
+
+    <a href="{{ path('app_voitures_list', {'idVoiture': voiture.idvoiture}) }}">Annuler</a>
+{% endblock %}

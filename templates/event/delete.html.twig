@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'Evenement {{ event.title }}{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Supprimer l'Evenement "{{ event.title }}"</h1>
+    <p>Title:{{ event.title }}</p>
+<p> {{ event.date ? event.date|date('Y-m-d H:i:s') : 'Date non définie' }} </p>
+     <p>Nombre de personnes:{{  event.nbrPersonne }}</p>
+    <p>liste des invités : {{  event.listeInvites }}</p>
+        <p>Espace: {{  event.Espace }}</p>
+
+
+    <p>Êtes-vous sûr de vouloir supprimer cet espace ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_event_delete', {'': event.idEvent}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.idEvent) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <a href="{{ path('app_event_show', {'idEvent': event.idEvent}) }}">Annuler</a>
+    </main>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Nouvelle Réclamation{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <h1>Nouvelle Réclamation</h1>
+    {{ form_start(form) }}
+        <div class="form-group">
+            <label for="{{ form.descrirec.vars.id }}">Description</label>
+            <div class="input-group">
+               <select id="emoji-select" class="form-control">
+                    <option value="">Select an Emoji</option>
+                    <option value="😊">😊</option>
+                    <option value="😄">😄</option>
+                    <option value="❤️">❤️</option>
+                    <option value="😍">😍</option>
+                    <option value="😎">😎</option>
+                    <option value="🎉">🎉</option>
+                    <option value="👍">👍</option>
+                    <option value="👏">👏</option>
+                    <option value="🙌">🙌</option>
+                    <option value="🌟">🌟</option>
+                    <option value="🔥">🔥</option>
+                    <option value="💯">💯</option>
+                    <option value="💪">💪</option>
+                    <!-- Add more emoji options as needed -->
+                </select>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-secondary" id="insert-emoji-btn">Insert</button>
+                </div>
+            </div>
+            {{ form_widget(form.descrirec, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+        </div>
+        
+        {{ form_row(form.categorierec) }}
+        
+        {{ form_row(form.imagedata) }}
+        
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    {{ form_end(form) }}
+    <a href="{{ path('app_reclamation_index') }}" class="btn btn-primary">Retour à la liste des réclamations</a>
+ 
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emojiSelect = document.querySelector('#emoji-select');
+        const insertButton = document.querySelector('#insert-emoji-btn');
+        const descriptionField = document.querySelector('#{{ form.descrirec.vars.id }}');
+
+        // Insert selected emoji into the description field
+        insertButton.addEventListener('click', function() {
+            const selectedEmoji = emojiSelect.value;
+            if (selectedEmoji) {
+                const currentPosition = descriptionField.selectionStart;
+                const textBeforeCursor = descriptionField.value.substring(0, currentPosition);
+                const textAfterCursor = descriptionField.value.substring(currentPosition);
+                const newText = textBeforeCursor + selectedEmoji + textAfterCursor;
+                descriptionField.value = newText;
+            }
+        });
+    });
+</script>
+
+{% endblock %}

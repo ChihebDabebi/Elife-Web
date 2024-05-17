@@ -1,0 +1,76 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+    <!-- Search bar -->
+    <form method="GET" action="{{ path('search_reclamation') }}">
+        <input type="search" name="query" placeholder="Search by description">
+        <button type="submit">Search</button>
+    </form>
+    {# Display the category filter form #}
+    {{ form_start(form) }}
+        {{ form_row(form.category, {'id': 'reclamation_category'}) }} {# Add an ID to the category dropdown menu #}
+        {{ form_row(form.displayOption) }}
+        <button type="submit" id="filterButton">Filter</button>
+    {{ form_end(form) }}
+
+    {# Display statistics chart based on the selected display option #}
+    <div id="statisticsChartContainer">
+        <canvas id="statisticsChart"></canvas>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idrec</th>
+                <th>Descrirec</th>
+                <th>Daterec</th>
+                <th>Categorierec</th>
+                <th>Statutrec</th>
+                <th>Imagedata</th>
+                <th>Actions</th>
+                <th>Comments</th> {# Add a new column for comments #}
+            </tr>
+        </thead>
+        <tbody>
+            {% for reclamation in reclamations %}
+                <tr>
+                    <td>{{ reclamation.idrec }}</td>
+                    <td>{{ reclamation.descrirec }}</td>
+                    <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                    <td>{{ reclamation.categorierec }}</td>
+                    <td>{{ reclamation.statutrec }}</td>
+                    <td>
+                        {% if reclamation.imagedata %}
+                            <img src="data:image/jpeg;base64,{{ reclamation.imagedata|base64_encode }}" alt="Reclamation Image" class="reclamation-image" style="max-width: 100px; max-height: 100px;">
+                        {% else %}
+                            No image available
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_reclamation_show', {'idrec': reclamation.idrec}) }}">Show</a>
+                        <a href="{{ path('app_reclamation_edit', {'idrec': reclamation.idrec}) }}">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_comment_rec', {'reclamation_id': reclamation.idrec}) }}" class="btn btn-primary">View Comments</a> {# Add a button to view comments for this reclamation #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+    
+{% endblock %}

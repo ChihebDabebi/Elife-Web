@@ -1,0 +1,16 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Comments for Reclamation {{ reclamation.idrec }}{% endblock %}
+
+{% block body %}
+    <h1>Comments for Reclamation {{ reclamation.idrec }}</h1>
+    {% if comments is empty %}
+        <p>No comments found for this reclamation.</p>
+    {% else %}
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

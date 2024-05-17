@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parking {{ parking.idparking }}{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Détails du parking :</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-text">Nom: {{ parking.nom }}</h5>
+                        <h5 class="card-text">Capacité: {{ parking.capacite }}</h5>
+                        <h5 class="card-text">Type: {{ parking.type }}</h5>
+                        <h5 class="card-text">Nombre Actuel: {{ parking.nombreActuelles }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

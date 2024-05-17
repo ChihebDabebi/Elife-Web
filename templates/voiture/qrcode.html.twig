@@ -1,0 +1,23 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Votre QR CODE{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4" style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+                    <h1 style="color: #0F354F;">Votre QR CODE</h1>
+                    <div>
+                        <img src="{{ qrCodeImage }}" alt="QR Code" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_voiture_new') }}" class="btn btn-primary">Retour au formulaire d'ajout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

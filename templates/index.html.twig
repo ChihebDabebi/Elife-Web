@@ -1,0 +1,25 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %} Bienvenue chez WirelesSolution Elife {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ asset('Front/img/smart.png') }}" class="img-fluid" alt="Smart Home" width="400">
+        </div>
+        <div class="col-md-6">
+            <h2>Gérez votre résidence en toute simplicité avec notre application !</h2>
+            <p>Réservez les espaces communs, surveillez votre consommation d'énergie, signalez les réparations et communiquez facilement avec vos voisins. Une solution intuitive pour une vie résidentielle plus facile et connectée.</p>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.425098292584!2d10.188383570605783!3d36.900710572410105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cbb73f78b917%3A0xfa77a5668dcfbd64!2sEsprit%20Block%20M!5e0!3m2!1sfr!2stn!4v1715003652447!5m2!1sfr!2stn" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

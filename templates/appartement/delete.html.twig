@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'Appartement {% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+
+
+ 
+    <p>Êtes-vous sûr de vouloir supprimer cet Appartement ? Cette action est irréversible.</p>
+
+    <form method="post" action="{{ path('app_appartement_delete', {'idAppartement': appartement.idAppartement}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appartement.idAppartement) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <a href="{{ path('app_appartement_show', {'idAppartement': appartement.idAppartement}) }}">Annuler</a>
+    </main>
+{% endblock %}

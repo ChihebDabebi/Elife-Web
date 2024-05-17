@@ -1,0 +1,31 @@
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            <strong>{{ form_label(form.title, 'Titre de l\'événement', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.date, 'Date de l\'événement', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {# Utilisation du filtre date pour formater la date au format 'Y-m-d' #}
+            {{ form_widget(form.date, {'attr': {'class': 'form-control'}, 'value': form.vars.value.date|date('Y-m-d')}) }}
+            {{ form_errors(form.date) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.nbrPersonne, 'Nombre de personnes', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.nbrPersonne, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nbrPersonne) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.listeInvites, 'Desciption', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.listeInvites, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.listeInvites) }}
+        </div>
+        <div class="form-group">
+            <strong>{{ form_label(form.espace, 'Espace associé', {'label_attr': {'class': 'form-label'}}) }}</strong>
+            {{ form_widget(form.espace, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.espace) }}
+        </div>
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>
